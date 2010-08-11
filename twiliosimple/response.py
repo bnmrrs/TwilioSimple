@@ -23,8 +23,40 @@
 #  THE SOFTWARE.
 
 
-from twilio import Utils
-
-from twiliosimple.connection import Twilio
-from twiliosimple.outgoing import OutgoingCall
-from twiliosimple.response import Response
+class Response:
+	_response = ""
+	
+	def say(self, to_say):
+		self._response += "<Say>%s</Say>" % (to_say)
+		
+		return self
+		
+	def play(self, to_play):
+		self._response += "<Play>%s</Play>" % (to_play)
+		return self
+		
+	def redirect_get(self):
+		pass
+		
+	def gather(self, action_url, num_digits=1, finish_on_key='#', timeout=5, method='POST'):
+		self._response += "<Gather action='%s' numDigits='%d' finishOnKey='%s' timeout='%d' method='%s' />" \
+			% (action_url, num_digits, finish_on_key, timeout, method)
+		return self
+		
+	def record(self, action_url, max_length=60, finish_on_key='#', timeout=5, method='POST'):
+		self._response += "<Record action='%s' maxLength='%d' finishOnKey='%s' timeout='%d' method='%s' />" \
+			% (action_url, max_length, finish_on_key, timeout, method)
+		return self
+		
+	def hangup(self):
+		self._response += '<Hangup />'
+		return self
+		
+	def dial(self):
+		pass
+		
+	def get_response(self):
+		return "<?xml version='1.0'?><Response>%s</Response>" % (self._response)
+		
+	def print_response(self):
+		print self.get_response() 
