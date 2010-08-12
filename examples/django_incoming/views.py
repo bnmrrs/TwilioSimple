@@ -12,7 +12,7 @@ def incoming_call(request):
 		'example.mp3'
 		).hangup()
 		
-		return render_to_response('templates/incoming_call.html', {
+		return render_to_response('templates/twilio_response.html', {
 			'response': response.get_response
 		})
 	else:
