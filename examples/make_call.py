@@ -1,4 +1,4 @@
-from TwilioSimple import Twilio
+from twiliosimple import Twilio
 
 # Account SID provided by Twilio
 account_sid = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'

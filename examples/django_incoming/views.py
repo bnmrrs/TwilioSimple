@@ -1,19 +1,17 @@
-from TwilioSimple import Twilio, Utils, Response
+from twiliosimple import Twilio, Utils, DjangoResponse
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 
 def incoming_call(request):
 	if is_valid_twilio_request(request):
-		response = Response()
+		response = DjangoResponse()
 		
-		response.say(
+		return response.say(
 			'Thank you for calling TwilioSimple'
 		).play(
 		'example.mp3'
 		).hangup()
-		
-		return render_to_response('templates/twilio_response.html', {
-			'response': response.get_response
-		})
 	else:
 		return HttpResponse(status=403)
+
+print incoming_call('test')
