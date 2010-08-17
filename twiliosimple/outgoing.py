@@ -27,11 +27,11 @@ import simplejson as json
 
 import exceptions
 
-class OutgoingCall:
-  def __init__(self, call_response):
-    self.raw_response = call_response
-    self.validated_response = self.validate_response(call_response)
-    self.load_response(self.loaded_response)
+class OutgoingResponse:
+  def __init__(self, response):
+    self.raw_response = response
+    self.validated_response = self.validate_response(response)
+    self.load_response(self.validated_response)
 
   def validate_response(self, response):
     try:
@@ -45,6 +45,16 @@ class OutgoingCall:
     if 'RestException' in response['TwilioResponse']:
       raise RestException(response['TwilioResponse']['RestException']['Message'])
 
+    return self.validate(response)
+
+  def get_response(self):
+    return self.loaded_response
+
+  def get_raw_response(self):
+    return self.raw_response
+
+class OutgoingCall(OutgoingResponse):
+  def validate(self, response):
     if not 'Call' in response['TwilioResponse']:
       raise InvalidResponse('Call body was not included in the response')
 
@@ -64,8 +74,3 @@ class OutgoingCall:
         'flags': response['TwilioResponse']['Call']['Flags']
     }
 
-  def get_response(self):
-    return self.loaded_response
-
-  def get_raw_response(self):
-    return self.raw_response
