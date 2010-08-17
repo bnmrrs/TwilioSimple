@@ -25,7 +25,7 @@
 
 import simplejson as json
 
-import twiliosimple.exceptions
+import exceptions
 
 class OutgoingCall:
   def __init__(self, call_response):
