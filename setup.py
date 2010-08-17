@@ -34,11 +34,11 @@ except ImportError:
 
 distutils.core.setup(
     name="twiliosimple",
-    version="0.1",
+    version="0.1.1",
     packages = ["twiliosimple"],
     author="Ben Morris",
     author_email="ben@bnmrrs.com",
     url="http://www.github.com/bnmrrs/TwilioSimple",
     license="http://www.opensource.org/licenses/mit-license.php",
-    description="TwilioSimple wraps the current Twilio API.",
+    description="TwilioSimple wraps the official Twilio API.",
 )
