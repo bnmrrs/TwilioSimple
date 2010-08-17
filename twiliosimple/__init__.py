@@ -26,5 +26,5 @@
 from twilio import Utils
 
 from connection import Twilio
-from call import OutgoingCall
+from outgoing import OutgoingCall
 from response import Response
