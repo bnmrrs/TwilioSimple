@@ -25,7 +25,7 @@
 
 import twilio as twilio_official
 
-from call import OutgoingCall
+from outgoing import OutgoingCall
 
 class Twilio:
   def __init__(self, id, token):
@@ -45,3 +45,4 @@ class Twilio:
     })
 
     return OutgoingCall(self.account.request(api_endpoint, 'POST', details))
+
