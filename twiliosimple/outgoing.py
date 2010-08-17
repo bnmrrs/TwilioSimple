@@ -25,7 +25,7 @@
 
 import simplejson as json
 
-import exceptions
+from exceptions import InvalidResponse, RestException
 
 class OutgoingResponse:
   def __init__(self, response):
