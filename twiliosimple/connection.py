@@ -22,6 +22,8 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 #  THE SOFTWARE.
 
+import urllib2
+import simplejson as json
 
 import twilio as twilio_official
 
@@ -44,7 +46,12 @@ class Twilio:
       'Url': callback_url,
     })
 
-    return OutgoingCall(self.account.request(api_endpoint, 'POST', details))
+    try:
+      call_response = self.account.request(api_endpoint, 'POST', details))
+    except urllib2.HTTPError as exception:
+      call_response = exception.read()
+
+    return OutgoingCall(call_response)
 
   def sms(self, from_num, to, body, callback=False):
     api_endpoint = '%s/Accounts/%s/SMS/Messages.json' % (self.api_version, self.id)
@@ -58,4 +65,9 @@ class Twilio:
     if callback:
       details.update({ 'StatusCallback': callback })
 
-    return OutgoingSMS(self.account.request(api_endpoint, 'POST', details))
+    try:
+      sms_response = self.account.request(api_endpoint, 'POST', details)
+    except urllib2.HTTPError as exception:
+      sms_response = exception.read()
+
+    return OutgoingSMS(sms_response)
