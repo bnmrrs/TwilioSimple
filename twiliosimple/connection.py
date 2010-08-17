@@ -25,7 +25,7 @@
 
 import twilio as twilio_official
 
-from outgoing import OutgoingCall
+from outgoing import OutgoingCall, OutgoingSMS
 
 class Twilio:
   def __init__(self, id, token):
@@ -46,3 +46,16 @@ class Twilio:
 
     return OutgoingCall(self.account.request(api_endpoint, 'POST', details))
 
+  def sms(self, from_num, to, body, callback=False):
+    api_endpoint = '%s/Accounts/%s/SMS/Messages.json' % (self.api_version, self.id)
+
+    details = {
+      'From': from_num,
+      'To': to,
+      'Body': body
+    }
+
+    if callback:
+      details.update({ 'StatusCallback': callback })
+
+    return OutgoingSMS(self.account.request(api_endpoint, 'POST', details))

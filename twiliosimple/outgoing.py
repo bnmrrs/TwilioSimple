@@ -74,3 +74,24 @@ class OutgoingCall(OutgoingResponse):
         'flags': response['TwilioResponse']['Call']['Flags']
     }
 
+class OutgoingSMS(OutgoingResponse):
+  def validate(self, response):
+    if not 'SMSMessage' in response['TwilioResponse']:
+      raise InvalidResponse('SMS body was not included in the response')
+
+    return response
+
+  def load_response(self, response):
+    self.loaded_response = {
+        'sms_sid': response['TwilioResponse']['SMSMessage']['Sid'],
+        'date_created': response['TwilioResponse']['SMSMessage']['DateCreated'],
+        'date_updated': response['TwilioResponse']['SMSMessage']['DateUpdated'],
+        'date_sent': response['TwilioResponse']['SMSMessage']['DateSent'],
+        'account_sid': response['TwilioResponse']['SMSMessage']['AccountSid'],
+        'to': response['TwilioResponse']['SMSMessage']['To'],
+        'from': response['TwilioResponse']['SMSMessage']['From'],
+        'body': response['TwilioResponse']['SMSMessage']['Body'],
+        'status': response['TwilioResponse']['SMSMessage']['Status'],
+        'flags': response['TwilioResponse']['SMSMessage']['Flags']
+    }
+
