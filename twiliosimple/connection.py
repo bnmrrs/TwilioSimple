@@ -25,7 +25,7 @@
 
 import twilio as twilio_official
 
-from twiliosimple.outgoing import OutgoingCall
+from call import OutgoingCall
 
 class Twilio:
   def __init__(self, id, token):
@@ -35,14 +35,13 @@ class Twilio:
 
     self.account = twilio_official.Account(id, token)
 
-  def call(self, caller, number, callback_url, details={}):
+  def call(self, caller, called, callback_url, details={}):
     api_endpoint = '%s/Accounts/%s/Calls.json' % (self.api_version, self.id)
 
     details.update({
       'Caller': caller,
-      'Called': number,
+      'Called': called,
       'Url': callback_url,
     })
 
     return OutgoingCall(self.account.request(api_endpoint, 'POST', details))
-
