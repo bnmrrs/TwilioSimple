@@ -1,6 +1,6 @@
 ## TwilioSimple
 
-### Description
+### Overview
 TwilioSimple is a collection of wrapper classes for the official Twilio python API.  It attempts to simplify developer interaction with the Twilio API.
 
 ### Installation
