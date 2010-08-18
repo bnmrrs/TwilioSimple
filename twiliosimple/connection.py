@@ -47,7 +47,7 @@ class Twilio:
     })
 
     try:
-      call_response = self.account.request(api_endpoint, 'POST', details))
+      call_response = self.account.request(api_endpoint, 'POST', details)
     except urllib2.HTTPError as exception:
       call_response = exception.read()
 
