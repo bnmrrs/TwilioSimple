@@ -48,8 +48,8 @@ class Twilio:
 
     try:
       call_response = self.account.request(api_endpoint, 'POST', details)
-    except urllib2.HTTPError as exception:
-      call_response = exception.read()
+    except urllib2.HTTPError, e:
+      call_response = e.read()
 
     return OutgoingCall(call_response)
 
@@ -67,7 +67,7 @@ class Twilio:
 
     try:
       sms_response = self.account.request(api_endpoint, 'POST', details)
-    except urllib2.HTTPError as exception:
-      sms_response = exception.read()
+    except urllib2.HTTPError, e:
+      sms_response = e.read()
 
     return OutgoingSMS(sms_response)
