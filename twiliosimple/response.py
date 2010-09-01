@@ -66,12 +66,3 @@ class Response:
 		
 	def printcontent(self):
 		print self.getcontent()
-		
-try:
-	from django.http import HttpResponse
-	
-	class DjangoResponse(Response, HttpResponse):
-		pass
-		
-except ImportError:
-	pass
