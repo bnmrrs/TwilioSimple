@@ -59,7 +59,7 @@ class Response:
 		return self
 		
 	def dial(self):
-		pass
+		raise NotImplementedError
 		
 	def getcontent(self):
 		return "<?xml version='1.0'?><Response>%s</Response>" % (self.content)
