@@ -37,7 +37,7 @@ class Response:
 		return self
 		
 	def redirect_get(self):
-		pass
+		raise NotImplementedError
 		
 	def gather(self, action_url, num_digits=1, finish_on_key='#', timeout=5, method='POST'):
 		self.content += "<Gather action='%s' numDigits='%d' finishOnKey='%s' timeout='%d' method='%s' />" \
