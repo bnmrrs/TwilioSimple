@@ -29,6 +29,7 @@ import twilio as twilio_official
 
 from outgoing import OutgoingCall, OutgoingSMS
 
+
 class Twilio:
 	
   def __init__(self, id, token):
@@ -37,7 +38,6 @@ class Twilio:
     self.api_version = '2008-08-01'
 
     self.account = twilio_official.Account(id, token)
-
 
   def call(self, caller, called, callback_url, details={}):
     api_endpoint = '%s/Accounts/%s/Calls.json' % (self.api_version, self.id)
@@ -54,7 +54,6 @@ class Twilio:
       call_response = e.read()
 
     return OutgoingCall(call_response)
-
 
   def sms(self, from_num, to, body, callback=False):
     api_endpoint = '%s/Accounts/%s/SMS/Messages.json' % (self.api_version, self.id)

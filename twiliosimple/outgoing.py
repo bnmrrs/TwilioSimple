@@ -27,13 +27,13 @@ import simplejson as json
 
 from exceptions import InvalidResponse, RestException
 
+
 class OutgoingResponse:
 	
   def __init__(self, response):
     self.raw_response = response
     self.validated_response = self.validate_response(response)
     self.load_response(self.validated_response)
-
 
   def validate_response(self, response):
     try:
@@ -49,10 +49,8 @@ class OutgoingResponse:
 
     return self.validate(response)
 
-
   def get_response(self):
     return self.loaded_response
-
 
   def get_raw_response(self):
     return self.raw_response
@@ -65,7 +63,6 @@ class OutgoingCall(OutgoingResponse):
       raise InvalidResponse('Call body was not included in the response')
 
     return response
-
 
   def load_response(self, response):
     self.loaded_response = {
@@ -89,7 +86,6 @@ class OutgoingSMS(OutgoingResponse):
       raise InvalidResponse('SMS body was not included in the response')
 
     return response
-
 
   def load_response(self, response):
 	
