@@ -23,7 +23,10 @@
 #  THE SOFTWARE.
 
 import urllib2
-import simplejson as json
+try:
+    import json
+except ImportError:
+    import simplejson as json
 
 import twilio as twilio_official
 
